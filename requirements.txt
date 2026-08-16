@@ -1,0 +1,27 @@
+streamlit>=1.45
+
+langchain>=1.0.0
+langchain-core>=1.0.0
+langchain-community>=0.3.0
+langchain-groq>=1.0.0
+langchain-huggingface>=0.2.0
+
+faiss-cpu
+
+sentence-transformers
+
+youtube-transcript-api
+google-api-python-client
+
+python-dotenv
+
+tiktoken
+
+#install these libraries
+## Install PyTorch CPU-only (lightweight, no GPU needed)
+#pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+
+# Then install the rest
+#pip install sentence-transformers youtube-transcript-api pytube
+
+#pip install --upgrade youtube-transcript-api yt-dlp

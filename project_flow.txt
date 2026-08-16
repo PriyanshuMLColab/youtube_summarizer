@@ -1,0 +1,36 @@
+YouTube URL
+      │
+      ▼
+Extract Video ID
+      │
+      ▼
+YouTube API
+      │
+      ▼
+Video Title
+      │
+      ▼
+Transcript API
+      │
+      ▼
+Transcript
+      │
+      ▼
+RecursiveCharacterTextSplitter
+      │
+      ▼
+Embeddings
+      │
+      ▼
+FAISS Vector DB
+      │
+      ▼
+LLM (Groq)
+      │
+      ├────────────► Intelligent Summary
+      │
+      ▼
+ConversationalRetrievalChain
+      │
+      ▼
+Follow-up Questions

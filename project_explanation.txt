@@ -1,0 +1,54 @@
+Project Overview
+This document explains the demo project built with Streamlit, LangChain, Groq, YouTube APIs,
+FAISS and HuggingFace embeddings.
+
+requirements.txt
+Each dependency: streamlit (UI), langchain (framework), langchain-community (community
+integrations), langchain-groq (Groq LLM wrapper), langchain-text-splitters (chunking), faiss-cpu
+(vector DB), youtube-transcript-api (captions), google-api-python-client (YouTube Data API),
+python-dotenv (.env loader), sentence-transformers (embeddings), tiktoken (token utilities).
+
+
+.env
+Stores GROQ_API_KEY and YOUTUBE_API_KEY separately from source code.
+prompts.py
+SUMMARY_PROMPT is a reusable PromptTemplate. The LLM first classifies the video (tutorial,
+podcast, interview, educational, review, news, other) and then adapts the summary format
+accordingly.
+
+
+utils.py
+load_dotenv() loads secrets. build() creates the YouTube client. extract_video_id() parses the URL
+using regex. get_video_title() calls videos().list(part='snippet'). get_transcript() concatenates
+transcript segments into one text string.
+
+app.py Imports
+Imports Streamlit, environment loader, utilities, prompt, Groq chat model, PromptTemplate, text
+splitter, FAISS, embeddings, conversation memory and retrieval chain.
+LLM Initialization
+ChatGroq(model='llama-3.3-70b-versatile') creates the language model interface.
+
+Streamlit UI
+st.title(), st.text_input(), and buttons create the interactive interface.
+Processing Flow
+Analyze button extracts video ID, fetches title and transcript, creates PromptTemplate, executes
+prompt | llm (LCEL), and displays summary.
+Chunking
+RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200) splits long transcripts while
+preserving context.
+Embeddings
+HuggingFaceEmbeddings converts each chunk into a dense vector.
+FAISS
+FAISS.from_documents() builds a vector index for semantic retrieval.
+Memory
+ConversationBufferMemory stores previous questions and answers.
+ConversationalRetrievalChain
+Retrieves relevant transcript chunks, combines them with chat history, and asks the LLM to
+generate a grounded answer.
+
+End-to-End Lifecycle
+User URL --> Transcript --> Summary --> Chunking --> Embeddings --> FAISS --> Retriever --> Groq
+LLM -->Follow-up Answers.
+Interview Talking Points
+Explain why RAG reduces hallucinations, why chunk overlap is useful, why embeddings enable
+semantic search, and why memory improves follow-up conversations
